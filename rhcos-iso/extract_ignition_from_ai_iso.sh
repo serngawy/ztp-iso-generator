@@ -25,15 +25,18 @@ cp /mnt/discovery_iso/images/ignition.img /tmp/temporary_ignition/
 # extract the file
 pushd /tmp/temporary_ignition
 
+mv ignition.img ignition.img.xz	
+unxz ignition.img.xz
+
 # detect file type, as it can change depending on versions
-FILE_TYPE=$(file ignition.img)
-if [[ $FILE_TYPE == *"xz"* ]];then
-    mv ignition.img ignition.img.xz
-    unxz ignition.img.xz
-elif [[ $FILE_TYPE == *"gzip"* ]]; then
-    mv ignition.img ignition.img.gz
-    gunzip ignition.img.gz
-fi
+#FILE_TYPE=$(file ignition.img)
+#if [[ $FILE_TYPE == *"xz"* ]];then
+#    mv ignition.img ignition.img.xz
+#    unxz ignition.img.xz
+#elif [[ $FILE_TYPE == *"gzip"* ]]; then
+#    mv ignition.img ignition.img.gz
+#    gunzip ignition.img.gz
+#fi
 
 # extract with cpio
 cpio -idmv < ignition.img
